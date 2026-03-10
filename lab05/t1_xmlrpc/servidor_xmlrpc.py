@@ -1,7 +1,7 @@
 # servidor_xmlrpc.py
 from xmlrpc.server import SimpleXMLRPCServer
 import datetime
-
+import math
 # ===== FUNCOES DO SERVICO =====
 
 def calcular(operacao: str, a: float, b: float) -> float:
@@ -14,6 +14,7 @@ def calcular(operacao: str, a: float, b: float) -> float:
         "subtracao":     lambda x, y: x - y,
         "multiplicacao": lambda x, y: x * y,
         "divisao":       lambda x, y: x / y if y != 0 else float("inf"),
+        "raiz_quadrada": lambda x, _: math.sqrt(x) if x >= 0 else float("nan"),
     }
     if operacao not in ops:
         raise ValueError(f"Operacao desconhecida: '{operacao}'")
@@ -30,7 +31,7 @@ def registrar_evento(mensagem: str) -> str:
 
 def listar_operacoes() -> list:
     """Retorna a lista de operacoes disponiveis (introspeccao simples)."""
-    return ["soma", "subtracao", "multiplicacao", "divisao"]
+    return ["soma", "subtracao", "multiplicacao", "divisao", "raiz_quadrada"]
 
 # ===== CONFIGURACAO DO SERVIDOR =====
 

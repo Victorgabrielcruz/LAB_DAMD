@@ -20,6 +20,7 @@ def main():
         ("subtracao",     10.0, 3.0),
         ("multiplicacao",  4.0, 7.0),
         ("divisao",       22.0, 7.0),
+        ("raiz_quadrada", 9.0, 0.0), 
     ]
     for op, a, b in chamadas:
         try:
@@ -37,7 +38,8 @@ def main():
     # Operacao invalida — deve retornar Fault
     print("\n  Testando operacao invalida ('raiz_quadrada'):")
     try:
-        proxy.calcular("raiz_quadrada", 9.0, 0.0)
+        resultado = proxy.calcular("raiz_quadrada", 9.0, 0.0)
+        print(f"  calcular('raiz_quadrada', 9.0, 0.0) = {resultado:.6f}")
     except xmlrpc.client.Fault as e:
         print(f"  Fault recebido: {e.faultString}")
 
